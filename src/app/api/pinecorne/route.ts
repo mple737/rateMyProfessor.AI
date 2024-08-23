@@ -1,10 +1,10 @@
 import { CreateIndexOptions, Pinecone } from "@pinecone-database/pinecone";
 import { NextResponse } from "next/server";
+const pc = new Pinecone({
+  apiKey: process.env.PINE_CONE_API_KEY as string,
+});
 
 export async function POST() {
-  const pc = new Pinecone({
-    apiKey: process.env.PINE_CONE_API_KEY as string,
-  });
   const options: CreateIndexOptions = {
     name: "rmp",
     dimension: 1024,
@@ -21,4 +21,9 @@ export async function POST() {
 
   await pc.createIndex(options);  
   return NextResponse.json({ status: 201, data: "Index created" });
+}
+
+export async function GET() {
+  const indexes = pc.listIndexes();
+  return NextResponse.json({ status: 200, data: indexes });
 }

@@ -1,6 +1,6 @@
 // src/app/api/ai/route.ts
 import { NextApiRequest, NextApiResponse } from 'next';
-import { withAuth, ClerkAPI } from '@clerk/nextjs/api';
+//import { withAuth, ClerkAPI } from '@clerk/nextjs';
 
 // Your API handler
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,4 +22,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 // Export your handler wrapped with Clerk authentication
-export default withAuth(handler);
+//export default withAuth(handler);
