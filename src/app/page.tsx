@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { MessageData } from "./lib/utils/types";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 
 const defaultMessage: MessageData[] = [
   {
@@ -14,36 +14,63 @@ export default function Home() {
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<MessageData[]>(defaultMessage);
 
-  async function handle() {
-    const response = await fetch("/api/chat", {
+  async function handleSubmit(e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) {
+    e.preventDefault();
+    setMessage("");
+    setMessages((messages) => [
+      ...messages,
+      { role: "user", content: message },
+      { role: "assistant", content: "" },
+    ]);
+    const response = await fetch("/api/ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify([...messages, { role: "user", content: message }]),
     });
+    if(!response.body) return;
     const reader = response.body?.getReader();
     const decoder = new TextDecoder();
 
     if (!reader) return;
     while (true) {
-      try {
-        const { value, done } = await reader.read();
-        const text = decoder.decode(value, { stream: true });
+      const { value, done } = await reader.read();
+      const text = decoder.decode(value, { stream: true });
 
-        setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1];
-          let otherMessages = messages.slice(0, messages.length - 1);
-          return [
-            ...otherMessages,
-            {
-              ...lastMessage,
-              content: lastMessage.content + text,
-            },
-          ];
-        });
-        if (done) break;
-      } catch (error) {}
+      setMessages((messages) => {
+        let lastMessage = messages[messages.length - 1];
+        let otherMessages = messages.slice(0, messages.length - 1);
+        return [
+          ...otherMessages,
+          {
+            ...lastMessage,
+            content: lastMessage.content + text,
+          },
+        ];
+      });
+      if (done) break;
     }
   }
+
+
+  return (
+    <div>
+      <div>
+        {messages.map((message, index) => (
+          <div key={index}>
+            <p>
+              {message.role}: {message.content}
+            </p>
+          </div>
+        ))}
+      </div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <button onClick={handleSubmit}>Send</button>
+    </div>
+  );
 }

@@ -26,10 +26,7 @@ By following these guidelines, you can provide students with valuable informatio
 
 export async function POST(req: NextRequest) {
   const data = (await req.json()) as [{ content: string }];
-  if (!data) {
-    return NextResponse.json({ status: 400, data: "Bad request" });
-  }
-
+  if(!data.length) return NextResponse.json({ data: "Internal Error", status: 500 });
   const text = data[data.length - 1].content;
 
   const response = await fetch(
@@ -115,7 +112,7 @@ export async function POST(req: NextRequest) {
                 return JSON.parse(line);
               } catch (error) {
                 console.error(error);
-                return null;
+                return '';
               }
             });
           const encoder = new TextEncoder();
@@ -125,7 +122,6 @@ export async function POST(req: NextRequest) {
               const content = chunk.choices[0].delta.content;
               if (content) {
                 const text = encoder.encode(content);
-                
                 controller.enqueue(text);
               }
             }
@@ -140,5 +136,5 @@ export async function POST(req: NextRequest) {
       }
     },
   });
-  return NextResponse.json(stream);
+  return new NextResponse(stream);
 }
