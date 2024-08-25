@@ -1,6 +1,6 @@
 "use client";
 
-import { SignIn, SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
+import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Typography } from '@mui/material';
 
