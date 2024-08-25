@@ -20,8 +20,7 @@ const Page: React.FC = () => {
     <main className="flex w-full h-screen bg-cover bg-center bg-[url('/img/ai.avif')]">
       {/* Main Section with Background Image */}
       <div className="relative w-full flex flex-col justify-center items-center bg-black bg-opacity-60 h-full p-6">
-
-        <section className="relative flex flex-col items-center z-10 text-center pt-24 lg:pt-32"> {/* Increased padding-top for larger screens */}
+        <section className="relative flex flex-col mt-32 items-center z-10 text-center pt-24 lg:pt-32"> {/* Increased padding-top for larger screens */}
           {/* "Welcome to" with Dot SVG */}
           <section className="flex flex-col items-center mb-2 text-center">
             <div className="relative uppercase tracking-widest text-md bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent font-bold mb-4 flex items-center">
