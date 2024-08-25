@@ -152,6 +152,7 @@ const ChatComponent: React.FC = () => {
           ))}
           <div ref={messagesEndRef} />
         </Box>
+        
         <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
           <TextField
             variant="outlined"
@@ -206,5 +207,7 @@ const ChatComponent: React.FC = () => {
     </Box>
   );
 };
+
+
 
 export default ChatComponent;
