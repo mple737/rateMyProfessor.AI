@@ -1,6 +1,7 @@
 export type MessageData = {
     role: "user" | "assistant";
     content: string;
+    loading?: boolean; // Optional loading property
   };
   
   export interface IResponse {
