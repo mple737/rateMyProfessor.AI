@@ -116,6 +116,8 @@ const ChatComponent: React.FC = () => {
             </Typography>
           </Box>
         )}
+
+
         <Box sx={{
           overflowY: 'auto',
           flexGrow: 1,
@@ -123,6 +125,8 @@ const ChatComponent: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
         }}>
+
+
           {messages.map((msg, index) => (
             <Box
               key={index}
@@ -138,6 +142,7 @@ const ChatComponent: React.FC = () => {
                 alignItems: 'center',
               }}
             >
+
               <Typography variant="body1">
                 {msg.role === 'ai' && msg.loading ? (
                   <span style={{ fontWeight: 'bold', color: '#FF5733' }}>Loading...</span>
@@ -147,14 +152,17 @@ const ChatComponent: React.FC = () => {
                     {msg.content}
                   </>
                 )}
+
+
               </Typography>
             </Box>
           ))}
           <div ref={messagesEndRef} />
         </Box>
-        
+
         <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
           <TextField
+
             variant="outlined"
             value={input}
             onChange={handleInputChange}
@@ -163,26 +171,35 @@ const ChatComponent: React.FC = () => {
             multiline
             minRows={1}
             maxRows={4}
+
             sx={{
               flexGrow: 1,
               mr: 1,
               backgroundColor: '#202222',
+
               border: 'solid 1px #3d3f40',
+
               borderRadius: 10,
+
               '& .MuiOutlinedInput-root': {
                 '& fieldset': {
                   borderColor: 'transparent',
                 },
+
                 '&:hover fieldset': {
                   borderColor: 'transparent',
                 },
+
                 '&.Mui-focused fieldset': {
                   borderColor: 'transparent',
                 },
+
               },
+
               '& .MuiInputBase-input': {
                 color: 'white',
               },
+
               '& .MuiInputBase-input::placeholder': {
                 color: '#3d3f40',
               },
@@ -191,6 +208,7 @@ const ChatComponent: React.FC = () => {
           <IconButton
             onClick={handleSend}
             sx={{
+
               bgcolor: '#4c4388',
               color: 'white',
               width: '60px',
@@ -198,6 +216,7 @@ const ChatComponent: React.FC = () => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              
             }}
           >
             <SendIcon />
