@@ -55,7 +55,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className="h-screen mt-20 mx-20">
       <div>
         {messages.map((message, index) => (
           <div key={index}>

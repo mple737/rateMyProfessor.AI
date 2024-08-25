@@ -1,10 +1,13 @@
 "use client";
 
-import { SignedOut, SignInButton, SignedIn, UserButton } from '@clerk/nextjs';
+import { SignedOut, SignInButton, SignedIn, UserButton, useUser, SignOutButton } from '@clerk/nextjs';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
+
 export default function Header() {
+
+  const { isSignedIn } = useUser();
 
   const router = useRouter(); 
 
@@ -23,24 +26,15 @@ export default function Header() {
 
       <div className="flex items-center space-x-4">
         <SignedOut>
-
-
           <div className="mr-4 px-2 py-2 bg-gradient-to-r from-purple-700 to-blue-700 text-white rounded-lg hover:from-purple-600 hover:to-blue-800 transition">
-            <SignInButton mode="modal">Log in</SignInButton>
+            {isSignedIn ? <SignOutButton>Log in</SignOutButton> : <SignInButton>Log in</SignInButton>}
           </div>
-
-
         </SignedOut>
-
         <SignedIn>
-
           <div className="mr-4 px-2 py-2 bg-gradient-to-r from-purple-700 to-blue-700 text-white rounded-lg hover:from-purple-600 hover:to-blue-800 transition">
             <UserButton showName />
           </div>
-
-
         </SignedIn>
-
       </div>
     </header>
   );

@@ -1,26 +1,17 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { SignInButton } from '@clerk/nextjs';
-import { motion } from 'framer-motion';
-import { Box, Typography, useTheme, useMediaQuery, Slide } from '@mui/material';
+import { SignIn, SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Typography } from '@mui/material';
 
 const Page: React.FC = () => {
-  const [isClient, setIsClient] = useState<boolean>(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [showAboutUs, setShowAboutUs] = useState<boolean>(false);
-
-  useEffect(() => {
-    setIsClient(true);
-    setShowAboutUs(true); // Trigger the "About Us" section animation
-  }, []);
+  const { isSignedIn } = useUser();
 
   return (
-    <main className="flex w-full bg-cover bg-center bg-[url('/img/ai.avif')]">
+    <main className="flex w-full h-full bg-cover bg-center bg-[url('/img/ai.avif')]">
       {/* Main Section with Background Image */}
-      <div className="relative w-full flex flex-col justify-center items-center bg-black bg-opacity-60 h-full p-6">
-        <section className="relative flex flex-col overflow-auto items-center z-10 text-center pt-24 lg:pt-32"> {/* Increased padding-top for larger screens */}
+      <div className="relative w-full flex flex-col items-center bg-black bg-opacity-60 h-full p-6">
+        <section className="relative flex flex-col items-center z-10 text-center pt-24"> {/* Increased padding-top for larger screens */}
           {/* "Welcome to" with Dot SVG */}
           <section className="flex flex-col items-center mb-2 text-center">
             <div className="relative uppercase tracking-widest text-md bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 bg-clip-text text-transparent font-bold mb-4 flex items-center">
@@ -112,11 +103,11 @@ const Page: React.FC = () => {
           {/* Get Started Button */}
           <div className="flex flex-col items-center mb-8">
             <div className="px-4 py-2 bg-gradient-to-r from-purple-700 to-blue-700 text-white rounded-lg hover:from-purple-600 hover:to-blue-800 transition mb-4">
-              <SignInButton mode="modal">Get Started</SignInButton>
+              {isSignedIn ? <SignOutButton>Get Started</SignOutButton> : <SignInButton>Get Started</SignInButton>}
             </div>
 
             {/* About Us Section */}
-            <Slide direction="up" in={showAboutUs} mountOnEnter unmountOnExit>
+            <AnimatePresence mode='wait'> 
               <motion.div
                 className="relative flex flex-col items-center justify-center w-full sm:w-5/6 md:w-4/5 lg:w-3/4 bg-transparent p-8 mt-12 lg:mt-16" // Adjusted margin-top for spacing on larger screens
                 initial={{ opacity: 0, y: 50 }}
@@ -145,7 +136,7 @@ const Page: React.FC = () => {
                   
                 </Typography>
               </motion.div>
-            </Slide>
+            </AnimatePresence>
           </div>
         </section>
       </div>
