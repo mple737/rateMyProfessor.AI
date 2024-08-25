@@ -6,7 +6,7 @@ import { MouseEvent, useState } from "react";
 const defaultMessage: MessageData[] = [
   {
     role: "assistant",
-    content: "Hi, I'm the Finance Support Agent, how can i assist you today?",
+    content: "Hi, I'm the rate my professor Support Agent, how can i assist you today?",
   },
 ];
 
