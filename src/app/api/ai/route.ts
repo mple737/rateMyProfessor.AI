@@ -42,6 +42,7 @@ export async function POST(req: NextRequest) {
   );
 
   const res = await response.json();
+  console.log(res)
 
   const pinecone = await getPinecone();
   const query = await pinecone.query({
