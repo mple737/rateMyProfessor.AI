@@ -1,12 +1,10 @@
 "use client";
 
-import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
+import { SignInButton, useUser } from '@clerk/nextjs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Typography } from '@mui/material';
 
 const Page: React.FC = () => {
-  const { isSignedIn } = useUser();
-
   return (
     <main className="flex w-full h-full bg-cover bg-center bg-[url('/img/ai.avif')]">
       {/* Main Section with Background Image */}
