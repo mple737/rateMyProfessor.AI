@@ -103,7 +103,7 @@ const Page: React.FC = () => {
           {/* Get Started Button */}
           <div className="flex flex-col items-center mb-8">
             <div className="px-4 py-2 bg-gradient-to-r from-purple-700 to-blue-700 text-white rounded-lg hover:from-purple-600 hover:to-blue-800 transition mb-4">
-              {isSignedIn ? <SignOutButton>Get Started</SignOutButton> : <SignInButton>Get Started</SignInButton>}
+              <SignInButton>Get Started</SignInButton>
             </div>
 
             {/* About Us Section */}
