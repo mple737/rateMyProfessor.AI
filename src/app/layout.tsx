@@ -9,8 +9,8 @@ import Footer from "./components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Snap Learn",
-  description: "A platform to learn and grow.",
+  title: "Rate My Professor AI",
+  description: "AI help assistant",
 };
 
 export default function RootLayout({
@@ -37,7 +37,7 @@ export default function RootLayout({
               <SignedIn>
                 {children}
               </SignedIn>
-              
+
             </main>
             <Footer />
           </div>

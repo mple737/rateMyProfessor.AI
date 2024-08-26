@@ -1,12 +1,10 @@
 "use client";
 
-import { SignInButton, SignOutButton, useUser } from '@clerk/nextjs';
+import { SignInButton, useUser } from '@clerk/nextjs';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Typography } from '@mui/material';
 
 const Page: React.FC = () => {
-  const { isSignedIn } = useUser();
-
   return (
     <main className="flex w-full h-full bg-cover bg-center bg-[url('/img/ai.avif')]">
       {/* Main Section with Background Image */}
@@ -103,7 +101,7 @@ const Page: React.FC = () => {
           {/* Get Started Button */}
           <div className="flex flex-col items-center mb-8">
             <div className="px-4 py-2 bg-gradient-to-r from-purple-700 to-blue-700 text-white rounded-lg hover:from-purple-600 hover:to-blue-800 transition mb-4">
-              {isSignedIn ? <SignOutButton>Get Started</SignOutButton> : <SignInButton>Get Started</SignInButton>}
+              <SignInButton>Get Started</SignInButton>
             </div>
 
             {/* About Us Section */}
